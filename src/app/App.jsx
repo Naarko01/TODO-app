@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { invoke } from "@tauri-apps/api/core";
 import CategoryListView from "../view/CategoryListView";
 import TodoListView from "../view/TodoListView";
 
@@ -8,7 +7,7 @@ function App() {
 		<Router>
 			<Routes>
 				<Route path="/" element={<CategoryListView />} />
-				<Route path="/todo-list/{catID}" />
+				<Route path="/todo-list/{catID}" element={<TodoListView />} />
 			</Routes>
 		</Router>
 	);

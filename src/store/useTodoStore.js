@@ -51,7 +51,7 @@ export const useTodoStore = create(
                ...state.categories,
                {
                   id: crypto.randomUUID(),
-                  title
+                  title: title,
                }
             ]
          })),
@@ -62,14 +62,13 @@ export const useTodoStore = create(
                t.categoryId === id ? { ...t, categoryId: undefined } : t)
          })),
       getTodosByCategory: (categoryId) =>
-         get().todos.filter((t) => t.categoryId === categoryId)
+         get().todos.filter((t) => t.categoryId === categoryId),
    }))
 );
 
 //autosave ? à revoir
 
 let timeout;
-
 useTodoStore.subscribe(
    (s) => ({
       todos: s.todos,

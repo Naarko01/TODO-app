@@ -1,18 +1,26 @@
 import { readTextFile, writeTextFile, exists, BaseDirectory, mkdir } from "@tauri-apps/plugin-fs";
 
 const FILE_NAME = "todos.json"
-const DIR_PATH = BaseDirectory.AppData
+const DIR_PATH = BaseDirectory.Document
 const APP_DIR = "TODO-App"
 
 async function ensureAppDir() {
-   const dirExists = await exists(APP_DIR, { dir: DIR_PATH })
+   try {
+      console.log("ensureAppDir - checking:", APP_DIR, "baseDir:", DIR_PATH);
+      const dirExists = await exists(APP_DIR, { baseDir: DIR_PATH })
 
-   if (!dirExists) {
-      await mkdir(APP_DIR, {
-         dir: DIR_PATH,
-         recursive: true
-      });
+      if (!dirExists) {
+         await mkdir(APP_DIR, {
+            baseDir: DIR_PATH,
+            recursive: true
+         });
+         console.log("ensureAppDir - created:", APP_DIR);
+      }
+   } catch (err) {
+      console.error("ensureAppDir - FS error:", err);
+      throw err;
    }
+
 }
 
 function getFilePath() {
@@ -24,9 +32,10 @@ export async function loadFromDisk(fallback) {
       await ensureAppDir();
 
       const path = getFilePath();
+      console.log("DEBUG fs path:", path, "dir:", DIR_PATH);
 
       const fileExists = await exists(path, {
-         dir: DIR_PATH
+         baseDir: DIR_PATH
       });
 
       if (!fileExists) {
@@ -34,7 +43,7 @@ export async function loadFromDisk(fallback) {
          return fallback;
       }
       const content = await readTextFile(path, {
-         dir: DIR_PATH
+         baseDir: DIR_PATH
       })
       return JSON.parse(content)
    } catch (err) {
@@ -47,9 +56,9 @@ export async function saveToDisk(data) {
    try {
       await ensureAppDir();
       await writeTextFile(
-         FILE_NAME,
+         getFilePath(),
          JSON.stringify(data, null, 2),
-         { dir: DIR_PATH }
+         { baseDir: DIR_PATH }
       );
    } catch (err) {
       console.error("Save error:", err);

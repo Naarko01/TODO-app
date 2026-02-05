@@ -6,21 +6,17 @@ const APP_DIR = "TODO-App"
 
 async function ensureAppDir() {
    try {
-      console.log("ensureAppDir - checking:", APP_DIR, "baseDir:", DIR_PATH);
       const dirExists = await exists(APP_DIR, { baseDir: DIR_PATH })
-
       if (!dirExists) {
          await mkdir(APP_DIR, {
             baseDir: DIR_PATH,
             recursive: true
          });
-         console.log("ensureAppDir - created:", APP_DIR);
       }
    } catch (err) {
       console.error("ensureAppDir - FS error:", err);
       throw err;
    }
-
 }
 
 function getFilePath() {
@@ -30,9 +26,7 @@ function getFilePath() {
 export async function loadFromDisk(fallback) {
    try {
       await ensureAppDir();
-
       const path = getFilePath();
-      console.log("DEBUG fs path:", path, "dir:", DIR_PATH);
 
       const fileExists = await exists(path, {
          baseDir: DIR_PATH

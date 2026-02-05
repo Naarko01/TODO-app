@@ -13,7 +13,7 @@ function App() {
 		<Router>
 			<Routes>
 				<Route path="/" element={<CategoryListView />} />
-				<Route path="/todo-list/{catID}" element={<TodoListView />} />
+				<Route path="/todo-list/:categoryId" element={<TodoListView />} />
 			</Routes>
 		</Router>
 	);

@@ -13,6 +13,7 @@
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-fs": "^2.4.5",
     "@tauri-apps/plugin-opener": "^2",
+    "lucide-react": "^0.563.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.13.0",
@@ -22,6 +23,7 @@
     "@tauri-apps/cli": "^2.10.0",
     "@vitejs/plugin-react": "^4.6.0",
     "react-devtools": "^7.0.1",
+    "sass": "^1.97.3",
     "vite": "^7.0.4"
   }
 }

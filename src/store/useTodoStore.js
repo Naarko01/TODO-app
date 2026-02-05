@@ -62,7 +62,7 @@ export const useTodoStore = create(
                t.categoryId === id ? { ...t, categoryId: undefined } : t)
          })),
       getTodosByCategory: (categoryId) =>
-         get().todos.filter((t) => t.categoryId === categoryId),
+         get().todos?.filter((t) => t.categoryId === categoryId),
    }))
 );
 

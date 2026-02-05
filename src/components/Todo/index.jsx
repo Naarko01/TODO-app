@@ -1,11 +1,4 @@
-export default function Todo({
-	id,
-	title,
-	content,
-	creationDate,
-	deadline,
-	categoryId,
-}) {
+export default function Todo({ id, title, content, creationDate, deadline }) {
 	return (
 		<div>
 			<div>

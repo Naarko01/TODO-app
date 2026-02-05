@@ -1,5 +1,14 @@
 import { ArrowBigRight } from "lucide-react";
 
+interface CategoryProps {
+	id: string;
+	title: string;
+	todoCount?: number | undefined;
+	nextTodoDeadline?: string | undefined;
+	onRemove: () => void;
+	onClick: () => void;
+}
+
 export default function TodoCategory({
 	id,
 	title,
@@ -7,7 +16,7 @@ export default function TodoCategory({
 	nextTodoDeadline,
 	onRemove,
 	onClick,
-}) {
+}: CategoryProps) {
 	return (
 		<div className="TodoCatContainer">
 			<div>

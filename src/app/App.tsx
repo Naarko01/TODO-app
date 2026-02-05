@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import CategoryListView from "../view/CategoryListView";
-import TodoListView from "../view/TodoListView";
+import CategoryListView from "../view/CategoryListView.js";
+import TodoListView from "../view/TodoListView.js";
 import { useEffect } from "react";
-import { useTodoStore } from "../store/useTodoStore";
+import { useTodoStore } from "../store/useTodoStore.js";
 
 function App() {
 	useEffect(() => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import TodoCategory from "../components/TodoCategory";
-import { useTodoStore } from "../store/useTodoStore";
+import TodoCategory from "../components/TodoCategory/index.jsx";
+import { useTodoStore } from "../store/useTodoStore.js";
 import { useNavigate } from "react-router-dom";
 
 export default function CategoryListView() {
@@ -8,11 +8,11 @@ export default function CategoryListView() {
 	const addCategory = useTodoStore((state) => state.addCategory);
 	const deleteCategory = useTodoStore((state) => state.deleteCategory);
 	const navigate = useNavigate();
-	const [isAdding, setIsAdding] = useState(false);
-	const [newCatTitle, setNewCatTitle] = useState("");
-	const [error, setError] = useState(null);
+	const [isAdding, setIsAdding] = useState<boolean>(false);
+	const [newCatTitle, setNewCatTitle] = useState<string>("");
+	const [error, setError] = useState<null | string>(null);
 
-	function submitForm(e) {
+	function submitForm(e: React.SubmitEvent) {
 		e.preventDefault();
 		if (newCatTitle !== "") {
 			addCategory(newCatTitle);

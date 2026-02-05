@@ -1,6 +1,5 @@
 /**
- *
- * @param date A Date object to be formatted into a string suitable for an HTML date input field.
+ * @param {Date} date A Date object to be formatted into a string suitable for an HTML date input field.
  * @returns {string} A string in the format "YYYY-MM-DD" representing the given date.
  */
 function formatDateToInput(date: Date): string {
@@ -12,7 +11,6 @@ function formatDateToInput(date: Date): string {
 }
 
 /**
- *
  * @returns {Date} A Date object representing tomorrow's date.
  */
 function getTomorrowDate(): Date {

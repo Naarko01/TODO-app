@@ -13,6 +13,7 @@ const APP_DIR = "TODO-App";
 
 /**
  * Ensures that the application directory exists in the specified base directory.
+ * @throws Will throw an error if there is an issue accessing the file system or creating the directory.
  */
 async function ensureAppDir() {
 	try {
@@ -34,7 +35,6 @@ function getFilePath() {
 }
 
 /**
- *
  * @param {StoreData} fallback Data to return if loading fails or file doesn't exist. Also used to initialize the file on first run.
  * @returns {StoreData} The loaded data from disk, or the fallback if loading fails.
  * @description Loads the store data from disk.
@@ -65,7 +65,6 @@ export async function loadFromDisk(fallback: StoreData): Promise<StoreData> {
 }
 
 /**
- *
  * @param {StoreData} data The data to be saved to disk.
  * @description Saves the provided store data to disk.
  * It ensures the application directory exists before attempting to write the file.

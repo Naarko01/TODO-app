@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app/App.jsx";
+import { ThemeProvider } from "./context/ThemeContext.js";
 // @ts-ignore: SCSS module declarations are not present in this project
-import "./index.scss";
+import "./styles/index.scss";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
@@ -10,6 +11,8 @@ if (!rootElement) {
 }
 ReactDOM.createRoot(rootElement).render(
 	<React.StrictMode>
-		<App />
+		<ThemeProvider>
+			<App />
+		</ThemeProvider>
 	</React.StrictMode>,
 );

@@ -1,14 +1,12 @@
 import { useTodoStore } from "../store/useTodoStore.js";
 import { useParams, useNavigate } from "react-router-dom";
-import Todo from "../components/Todo/index.jsx";
+import TodoList from "../components/TodoList/index.js";
 import { useState } from "react";
 import { formatDateToInput, getTomorrowDate } from "../utils/helpers.js";
 
 export default function TodoListView() {
 	const { categoryId } = useParams();
-	const getTodos = useTodoStore((state) => state.getTodosByCategory);
 	const addTodos = useTodoStore((state) => state.addTodo);
-	const todos = getTodos(categoryId);
 	const navigate = useNavigate();
 	const [isAdding, setIsAdding] = useState<boolean>(false);
 	const [newTodoTitle, setNewTodoTitle] = useState<string>("");
@@ -42,7 +40,7 @@ export default function TodoListView() {
 	}
 
 	return (
-		<>
+		<div>
 			{isAdding ?
 				<form onSubmit={handleSubmit}>
 					<label htmlFor="newTodoTitle">Titre</label>
@@ -81,21 +79,7 @@ export default function TodoListView() {
 			<div>
 				<button onClick={() => navigate("/")}>Retour</button>
 			</div>
-			{todos.length === 0 ?
-				<div>No todos in this category</div>
-			:	<div>
-					{todos?.map((element) => (
-						<Todo
-							id={element.id}
-							title={element.title}
-							content={element.content}
-							creationDate={element.creationDate}
-							deadline={element.deadline}
-							key={element.id}
-						/>
-					))}
-				</div>
-			}
-		</>
+			<TodoList categoryId={categoryId} />
+		</div>
 	);
 }

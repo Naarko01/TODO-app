@@ -11,6 +11,16 @@ function formatDateToInput(date: Date): string {
 }
 
 /**
+ *
+ * @param {string} dateString A string in the format "DD/MM/YYYY" that needs to be converted to "YYYY-MM-DD".
+ * @returns {string} A string in the format "YYYY-MM-DD" suitable for an HTML date input field.
+ */
+function dateStringToInput(dateString: string): string {
+	const formatedString = dateString.split("/").reverse().join("-");
+	return formatedString;
+}
+
+/**
  * @returns {Date} A Date object representing tomorrow's date.
  */
 function getTomorrowDate(): Date {
@@ -19,4 +29,4 @@ function getTomorrowDate(): Date {
 	return tomorrow;
 }
 
-export { formatDateToInput, getTomorrowDate };
+export { formatDateToInput, getTomorrowDate, dateStringToInput };

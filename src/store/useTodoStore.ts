@@ -31,7 +31,6 @@ type Store = StoreData & {
 	toggleTodo: (id: string) => void;
 	addCategory: (title: string) => void;
 	deleteCategory: (id: string) => void;
-	getTodosByCategory: (categoryId?: string) => Todo[];
 };
 
 const defaultData: StoreData = {
@@ -40,7 +39,7 @@ const defaultData: StoreData = {
 };
 
 export const useTodoStore = create<Store>()(
-	subscribeWithSelector((set, get) => ({
+	subscribeWithSelector<Store>((set, get) => ({
 		...defaultData,
 		initialized: false,
 		// store init
@@ -95,8 +94,6 @@ export const useTodoStore = create<Store>()(
 					t.categoryId === id ? { ...t, categoryId: undefined } : t,
 				),
 			})),
-		getTodosByCategory: (categoryId) =>
-			get().todos?.filter((t) => t.categoryId === categoryId),
 	})),
 );
 

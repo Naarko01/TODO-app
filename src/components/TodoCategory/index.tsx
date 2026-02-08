@@ -1,13 +1,12 @@
 import { ArrowBigRight } from "lucide-react";
+import type { TodoCategory } from "../../store/useTodoStore.js";
 
-interface CategoryProps {
-	id: string;
-	title: string;
+type CategoryProps = TodoCategory & {
 	todoCount?: number | undefined;
 	nextTodoDeadline?: string | undefined;
 	onRemove: () => void;
 	onClick: () => void;
-}
+};
 
 export default function TodoCategory({
 	id,

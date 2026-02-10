@@ -23,6 +23,7 @@ export default function TodoList({ categoryId }: { categoryId: string | undefine
 							content={t.content}
 							creationDate={t.creationDate}
 							deadline={t.deadline}
+							categoryId={t.categoryId}
 							removeTodo={() => deleteTodo(t.id)}
 						/>
 					))}

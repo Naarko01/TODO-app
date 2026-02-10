@@ -2,3 +2,8 @@
 @use "./theme-generator";
 @use "./mixins";
 @use "../components/TodoCategory/todo-category";
+@use "../components/Todo/todo";
+@use "../components/TodoForm/todo-form";
+@use "../components/TodoList/todo-list";
+@use "../view/category-list-view";
+@use "../view/todo-list-view";

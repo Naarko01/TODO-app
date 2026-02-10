@@ -1,7 +1,7 @@
-import { useTheme } from "../../context/ThemeContext.js";
+import { useUserStore } from "../../store/useUserStore.js";
 
 export default function ThemeSwitcher() {
-	const { theme, changeTheme, availableThemes } = useTheme();
+	const { theme, changeTheme, availableThemes } = useUserStore();
 
 	return (
 		<div className='theme-switcher'>

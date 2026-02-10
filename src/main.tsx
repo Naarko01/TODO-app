@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app/App.jsx";
-import { ThemeProvider } from "./context/ThemeContext.js";
 // @ts-ignore: SCSS module declarations are not present in this project
 import "./styles/index.scss";
 
@@ -11,8 +10,6 @@ if (!rootElement) {
 }
 ReactDOM.createRoot(rootElement).render(
 	<React.StrictMode>
-		<ThemeProvider>
-			<App />
-		</ThemeProvider>
+		<App />
 	</React.StrictMode>,
 );

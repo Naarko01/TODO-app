@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
-import { loadFromDisk, saveToDisk } from "../persistance/storage.js";
 
 export type Todo = {
 	id: string;
@@ -12,19 +11,12 @@ export type Todo = {
 	deadline?: string | undefined;
 };
 
-export type TodoCategory = {
-	id: string;
-	title: string;
-};
+export type TodoCategory = { id: string; title: string };
 
-export type StoreData = {
-	todos: Todo[];
-	categories: TodoCategory[];
-};
+export type TodoData = { todos: Todo[]; categories: TodoCategory[] };
 
-type Store = StoreData & {
+type TodoStore = TodoData & {
 	initialized: boolean;
-	init: () => Promise<void>;
 	addTodo: (todo: Omit<Todo, "id" | "creationDate">) => void;
 	updateTodo: (id: string, patch: Partial<Todo>) => void;
 	deleteTodo: (id: string) => void;
@@ -33,20 +25,12 @@ type Store = StoreData & {
 	deleteCategory: (id: string) => void;
 };
 
-const defaultData: StoreData = {
-	todos: [],
-	categories: [],
-};
+const defaultData: TodoData = { todos: [], categories: [] };
 
-export const useTodoStore = create<Store>()(
-	subscribeWithSelector<Store>((set, get) => ({
+export const useTodoStore = create<TodoStore>()(
+	subscribeWithSelector<TodoStore>((set) => ({
 		...defaultData,
 		initialized: false,
-		// store init
-		init: async () => {
-			const data = await loadFromDisk(defaultData);
-			set({ ...data, initialized: true });
-		},
 		// TODO actions
 		addTodo: (todo) =>
 			set((state) => ({
@@ -62,30 +46,17 @@ export const useTodoStore = create<Store>()(
 			})),
 		updateTodo: (id, patch) =>
 			set((state) => ({
-				todos: state.todos.map((t) =>
-					t.id === id ? { ...t, ...patch } : t,
-				),
+				todos: state.todos.map((t) => (t.id === id ? { ...t, ...patch } : t)),
 			})),
-		deleteTodo: (id) =>
-			set((state) => ({
-				todos: state.todos.filter((t) => t.id !== id),
-			})),
+		deleteTodo: (id) => set((state) => ({ todos: state.todos.filter((t) => t.id !== id) })),
 		toggleTodo: (id) =>
 			set((state) => ({
-				todos: state.todos.map((t) =>
-					t.id === id ? { ...t, done: !t.done } : t,
-				),
+				todos: state.todos.map((t) => (t.id === id ? { ...t, done: !t.done } : t)),
 			})),
 		// Categories action
 		addCategory: (title) =>
 			set((state) => ({
-				categories: [
-					...state.categories,
-					{
-						id: crypto.randomUUID(),
-						title: title,
-					},
-				],
+				categories: [...state.categories, { id: crypto.randomUUID(), title: title }],
 			})),
 		deleteCategory: (id) =>
 			set((state) => ({
@@ -95,21 +66,4 @@ export const useTodoStore = create<Store>()(
 				),
 			})),
 	})),
-);
-
-//autosave ? à revoir
-
-let timeout: ReturnType<typeof setTimeout> | undefined;
-useTodoStore.subscribe(
-	(s) => ({
-		todos: s.todos,
-		categories: s.categories,
-	}),
-	(data) => {
-		clearTimeout(timeout);
-		//trigger la save 400ms après la dernière modification du state. Nouvelle modif entre temps reset le timer
-		timeout = setTimeout(() => {
-			saveToDisk(data);
-		}, 400);
-	},
 );

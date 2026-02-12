@@ -22,8 +22,8 @@ function App() {
 	}, []);
 
 	return (
-		<div className={theme}>
-			<ThemeSwitcher />
+		<div className={theme} id='theme'>
+			<ThemeSwitcher usecase='toggle' />
 			<Router>
 				<Routes>
 					<Route path='/' element={<CategoryListView />} />

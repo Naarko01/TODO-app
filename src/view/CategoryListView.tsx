@@ -24,22 +24,34 @@ export default function CategoryListView() {
 	}
 
 	return (
-		<div>
+		<div className='categoryListView'>
 			{isAdding ?
-				<form onSubmit={submitForm}>
-					<label htmlFor="newCatTitle">Titre</label>
+				<form onSubmit={submitForm} className='categoryListView_addForm'>
+					<p>Nouvelle Catégorie:</p>
+					<label htmlFor='newCatTitle'>Titre</label>
 					<input
-						type="text"
-						name="newCatTitle"
-						id="newCatTitle"
+						type='text'
+						name='newCatTitle'
+						id='newCatTitle'
 						value={newCatTitle}
 						onChange={(e) => setNewCatTitle(e.currentTarget.value)}
 					/>
-					<button type="submit">Créer</button>
-					<button onClick={() => setIsAdding(false)}>Annuler</button>
+					<div className='categoryListView_addForm--btn'>
+						<button type='submit' className='categoryListView_addForm--btn-submit'>
+							Créer
+						</button>
+						<button
+							onClick={() => setIsAdding(false)}
+							className='categoryListView_addForm--btn-cancel'>
+							Annuler
+						</button>
+					</div>
 					{error && <p>{error}</p>}
 				</form>
-			:	<button onClick={() => setIsAdding(true)}>Add category</button>}
+			:	<button onClick={() => setIsAdding(true)} className='categoryListView_addBtn'>
+					Add category
+				</button>
+			}
 			<div>
 				{categories.map((element) => (
 					<TodoCategory

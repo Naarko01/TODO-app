@@ -1,0 +1,59 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+.categoryListView {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 1rem;
+
+   &_addBtn {
+      @include base-button();
+   }
+
+   &_addForm {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid $border;
+      background-color: $card;
+      width: 50%;
+      max-width: 500px;
+      height: 150px;
+
+      label {
+         text-align: center;
+         font-weight: 700;
+      }
+
+      input {
+         height: 30px;
+         font-family: "JetBrains";
+         font-size: 16px;
+         font-weight: 600;
+         margin-bottom: 10px;
+         width: 80%;
+         max-width: 350px;
+         align-self: center;
+         border-radius: 100px;
+         padding: 0 20px;
+      }
+
+      &--btn {
+         display: flex;
+         justify-content: center;
+         gap: 20px;
+
+         &-submit {
+            @include base-button();
+         }
+
+         &-cancel {
+            @include base-button();
+         }
+      }
+   }
+}

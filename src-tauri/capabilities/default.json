@@ -5,6 +5,11 @@
 	"windows": ["main"],
 	"permissions": [
 		"core:default",
+		"core:window:allow-set-min-size",
+		"core:window:allow-center",
+		"core:window:allow-set-title",
+		"core:window:allow-show",
+		"core:window:allow-set-focus",
 		"opener:default",
 		"fs:default",
 		"fs:read-all",
@@ -14,9 +19,6 @@
 		"fs:allow-exists",
 		"fs:allow-watch",
 		"fs:read-dirs",
-		{
-			"identifier": "fs:scope",
-			"allow": ["**/*"]
-		}
+		{ "identifier": "fs:scope", "allow": ["**/*"] }
 	]
 }

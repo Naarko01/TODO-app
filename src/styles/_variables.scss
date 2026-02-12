@@ -1,16 +1,71 @@
 $themes: (
    light: (
-      primary: #1e3d59,
-      secondary: #ff6e40,
-      tertiary: #ffc13b,
-      background: #f5f0e1,
-      text: #1e3d59
+      bg: #dfe5ea,
+      card: #dadee2,
+      card2: #d4d8da,
+      text: #1a1a19,
+      text-muted: #525251,
+      text-on-color: #ffffff,
+      primary: #8c6700,
+      primary-fg: #ffffff,
+      secondary: #008b9e,
+      secondary-fg: #000000,
+      accent: #b21eb2,
+      accent-fg: #ffffff,
+      border: #c0c2c4,
+      ring: #a07a00,
+      good: #007a15,
+      good-fg: #ffffff,
+      warn: #c86700,
+      warn-fg: #030303,
+      bad: #9b1c9b,
+      bad-fg: #ffffff
    ),
    dark: (
-      primary: #408ec6,
-      secondary: #7a2048,
-      tertiary: #8a307f,
-      background: #1e2761,
-      text: #f9fafb
+      bg: #010202,
+      card: #050607,
+      card2: #0a0b0c,
+      text: #e4e4e4,
+      text-muted: #8f8f8f,
+      text-on-color: #000000,
+      primary: #a8863e,
+      primary-fg: #000000,
+      secondary: #348e9e,
+      secondary-fg: #000000,
+      accent: #df63dd,
+      accent-fg: #000000,
+      border: #212222,
+      ring: #967c48,
+      good: #358638,
+      good-fg: #000000,
+      warn: #bf6d2c,
+      warn-fg: #000000,
+      bad: #a440a3,
+      bad-fg: #ffffff
    )
 );
+
+$bg: var(--color-bg);
+$card: var(--color-card);
+$card2: var(--color-card2);
+$text: var(--color-text);
+$text-muted: var(--color-text-muted);
+$text-on-color: var(--color-text-on-color);
+$primary: var(--color-primary);
+$primary-fg: var(--color-primary-fg);
+$secondary: var(--color-secondary);
+$secondary-fg: var(--color-secondary-fg);
+$accent: var(--color-accent);
+$accent-fg: var(--color-accent-fg);
+$border: var(--color-border);
+$ring: var(--color-ring);
+$good: var(--color-good);
+$good-fg: var(--color-good-fg);
+$warn: var(--color-warn);
+$warn-fg: var(--color-warn-fg);
+$bad: var(--color-bad);
+$bad-fg: var(--color-bad-fg);
+
+@function color-opacity($color, $opacity) {
+   @return color-mix(in srgb, $color #{$opacity * 100%}, transparent);
+}

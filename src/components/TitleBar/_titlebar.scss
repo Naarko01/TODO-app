@@ -1,0 +1,71 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.titlebar {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 36px;
+   z-index: 10;
+   background-color: $primary;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+
+   /* Animation de déroulement */
+   transition:
+      transform 0.3s ease-out,
+      opacity 0.3s ease-out;
+   transform: translateY(-100%);
+   opacity: 0;
+   pointer-events: none; /* Empêche les clics si invisible */
+
+   /* État visible */
+   &.visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto; /* Réactive les clics */
+   }
+
+   .drag-area {
+      flex: 1;
+      height: 100%;
+      cursor: grab;
+      user-select: none;
+
+      &:active {
+         cursor: grabbing;
+      }
+   }
+
+   .controls {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      padding-right: 8px;
+      flex-shrink: 0;
+
+      button {
+         cursor: pointer;
+         padding: 4px 8px;
+         border: none;
+         background: transparent;
+         color: inherit;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         border-radius: 4px;
+         transition: background-color 0.2s;
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+         }
+
+         &:active {
+            background-color: rgba(255, 255, 255, 0.2);
+         }
+      }
+   }
+}

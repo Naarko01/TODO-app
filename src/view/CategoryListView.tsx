@@ -2,6 +2,7 @@ import { useState } from "react";
 import TodoCategory from "../components/TodoCategory/index.jsx";
 import { useTodoStore } from "../store/useTodoStore.js";
 import { useNavigate } from "react-router-dom";
+import { LucideClipboardList, PlusIcon } from "lucide-react";
 
 export default function CategoryListView() {
 	const categories = useTodoStore((state) => state.categories);
@@ -25,7 +26,19 @@ export default function CategoryListView() {
 
 	return (
 		<div className='categoryListView'>
-			{isAdding ?
+			<div className='categoryListView_header'>
+				<div className='categoryListView_header--title'>
+					<LucideClipboardList className='categoryListView_header--title-icon' />
+					<h1>Mes Catégories</h1>
+				</div>
+				<div className='categoryListView_header--addBtn'>
+					<PlusIcon className='plus-icon' />
+					<button onClick={() => setIsAdding(true)} disabled={isAdding}>
+						Ajouter
+					</button>
+				</div>
+			</div>
+			{isAdding && (
 				<form onSubmit={submitForm} className='categoryListView_addForm'>
 					<p>Nouvelle Catégorie:</p>
 					<label htmlFor='newCatTitle'>Titre</label>
@@ -48,11 +61,8 @@ export default function CategoryListView() {
 					</div>
 					{error && <p>{error}</p>}
 				</form>
-			:	<button onClick={() => setIsAdding(true)} className='categoryListView_addBtn'>
-					Add category
-				</button>
-			}
-			<div>
+			)}
+			<div className='categoryListView_list'>
 				{categories.map((element) => (
 					<TodoCategory
 						id={element.id}

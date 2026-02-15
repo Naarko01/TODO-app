@@ -12,13 +12,16 @@
 	"app": {
 		"windows": [
 			{
-				"title": "TODO-app",
+				"decorations": false,
 				"width": 800,
 				"height": 600,
 				"visible": true,
 				"center": true,
 				"minHeight": 500,
-				"minWidth": 450
+				"minWidth": 450,
+				"maxHeight": 850,
+				"maxWidth": 1000,
+				"maximizable": false
 			}
 		],
 		"security": { "csp": null }

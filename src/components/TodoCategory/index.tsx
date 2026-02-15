@@ -1,4 +1,4 @@
-import { ArrowBigRight } from "lucide-react";
+import { ArrowBigRight, LucideTrash2 } from "lucide-react";
 import type { TodoCategory } from "../../store/useTodoStore.js";
 
 type CategoryProps = TodoCategory & {
@@ -17,17 +17,12 @@ export default function TodoCategory({
 	onClick,
 }: CategoryProps) {
 	return (
-		<div className="TodoCatContainer">
-			<div>
-				<h1>{title}</h1>
-				<h2>{id}</h2>
-				<button onClick={onRemove}>Remove</button>
-				<p>{todoCount}</p>
-			</div>
-			<div>
-				<ArrowBigRight onClick={onClick} />
-				<p>{nextTodoDeadline}</p>
-			</div>
+		<div className='TodoCategory'>
+			<h1 className='TodoCategory_title'>{title}</h1>
+			<LucideTrash2 onClick={onRemove} className='TodoCategory_delete' />
+			<p className='TodoCategory_todocount'>{todoCount}</p>
+			<ArrowBigRight onClick={onClick} className='TodoCategory_select' />
+			<p className='TodoCategory_nextDeadline'>{nextTodoDeadline}</p>
 		</div>
 	);
 }

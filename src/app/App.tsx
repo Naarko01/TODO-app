@@ -1,14 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import CategoryListView from "../view/CategoryListView.js";
-import TodoListView from "../view/TodoListView.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useUserStore } from "../store/useUserStore.js";
 import { setupAutoSave } from "../persistance/sync.js";
 import { initializeApp } from "../store/useAppStore.js";
+import CategoryListView from "../view/CategoryListView.js";
+import TodoListView from "../view/TodoListView.js";
 import ThemeSwitcher from "../components/ThemeSwitcher/ThemeSwitcher.js";
+import TitleBar from "../components/TitleBar/index.js";
 
 function App() {
 	const theme = useUserStore((state) => state.theme);
+	const [isTitlebarVisible, setIsTitlebarVisible] = useState<boolean>(false);
 
 	//initialize global store
 	useEffect(() => {
@@ -23,6 +25,16 @@ function App() {
 
 	return (
 		<div className={theme} id='theme'>
+			<TitleBar
+				isVisible={isTitlebarVisible}
+				onMouseEnter={() => setIsTitlebarVisible(true)}
+				onMouseLeave={() => setIsTitlebarVisible(false)}
+			/>
+			<div
+				className='titlebarToggleArea'
+				onMouseEnter={() => setIsTitlebarVisible(true)}
+				onMouseLeave={() => setIsTitlebarVisible(false)}
+			/>
 			<ThemeSwitcher usecase='toggle' />
 			<Router>
 				<Routes>

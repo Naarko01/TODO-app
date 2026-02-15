@@ -8,6 +8,7 @@
 @use "../view/category-list-view";
 @use "../view/todo-list-view";
 @use "../components/ThemeSwitcher/theme-switcher";
+@use "../components/TitleBar/titlebar";
 @font-face {
    font-family: "JetBrains";
    src: url("/src/assets/fonts/JetBrainsMono-Regular.ttf") format("truetype");
@@ -15,14 +16,33 @@
 
 html,
 body,
-p {
+p,
+h1,
+h2 {
    padding: 0;
    margin: 0;
    box-sizing: border-box;
    font-family: "JetBrains";
 }
 
+h1 {
+   font-size: 20px;
+}
+
 #theme {
    background-color: $bg;
    min-height: 100vh;
+   position: relative;
+}
+
+.themeSwitcher {
+   position: absolute;
+}
+
+.titlebarToggleArea {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 35px;
 }

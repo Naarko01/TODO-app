@@ -8,24 +8,24 @@
    width: 100%;
    height: 36px;
    z-index: 10;
-   background-color: $primary;
+   background-color: color-opacity($text-muted, 0.7);
+   backdrop-filter: blur(3px);
+   border-bottom: 1px solid $text-muted;
    display: flex;
    justify-content: space-between;
    align-items: center;
 
-   /* Animation de déroulement */
    transition:
       transform 0.3s ease-out,
       opacity 0.3s ease-out;
    transform: translateY(-100%);
    opacity: 0;
-   pointer-events: none; /* Empêche les clics si invisible */
+   pointer-events: none;
 
-   /* État visible */
    &.visible {
       transform: translateY(0);
       opacity: 1;
-      pointer-events: auto; /* Réactive les clics */
+      pointer-events: auto;
    }
 
    .drag-area {

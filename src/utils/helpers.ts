@@ -29,4 +29,13 @@ function getTomorrowDate(): Date {
 	return tomorrow;
 }
 
-export { formatDateToInput, getTomorrowDate, dateStringToInput };
+/**
+ *
+ * @param str A string that needs to be transformed to start with a capital letter.
+ * @returns Same string but with the first letter capitalized.
+ */
+function startWithCapital(str: string): string {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export { formatDateToInput, getTomorrowDate, dateStringToInput, startWithCapital };

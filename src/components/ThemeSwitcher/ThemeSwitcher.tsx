@@ -1,4 +1,5 @@
 import { useUserStore } from "../../store/useUserStore.js";
+import { Moon, Sun } from "lucide-react";
 
 type ThemeSwitchProps = { usecase: "toggle" | "select" };
 
@@ -19,7 +20,15 @@ export default function ThemeSwitcher({ usecase }: ThemeSwitchProps) {
 				</div>
 			:	<div className='themeSwitcher-toggle'>
 					<button onClick={toggleTheme}>
-						{theme.charAt(0).toUpperCase() + theme.slice(1)}
+						<Sun
+							className={`themeIcon ${theme === "light" ? "selected" : ""}`}
+							strokeWidth={"3"}
+						/>
+						<Moon
+							className={`themeIcon dark ${theme === "dark" ? "selected" : ""}`}
+							strokeWidth={"3"}
+						/>
+						<div className={`switch ${theme}`}></div>
 					</button>
 				</div>
 			}

@@ -3,20 +3,40 @@
 
 .TodoCategory {
    position: relative;
+   display: flex;
+   align-items: center;
    border: 1px solid $border;
    border-radius: 10px;
    background-color: $card2;
    width: 100%;
    height: 90px;
 
-   &_title {
+   &_content {
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+      &--title {
+      }
+
+      &--todocount {
+      }
+
+      &--nextDeadline {
+      }
+   }
+
+   button {
+      position: absolute;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
    }
 
    &_delete {
-      position: absolute;
+      right: 10px;
    }
 
    &_select {
-      position: absolute;
+      right: 50px;
    }
 }

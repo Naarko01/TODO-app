@@ -1,6 +1,6 @@
 import { XIcon, Maximize2Icon, Minimize2Icon, MinusIcon } from "lucide-react";
 import { useWindow } from "../../app/window.js";
-import { useState } from "react";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher.js";
 
 type TitlebarProps = { isVisible: boolean; onMouseEnter?: () => void; onMouseLeave?: () => void };
 
@@ -12,6 +12,7 @@ export default function TitleBar({ isVisible, onMouseEnter, onMouseLeave }: Titl
 			className={`titlebar ${isVisible ? "visible" : "hidden"}`}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}>
+			<ThemeSwitcher usecase='toggle' />
 			<div className='drag-area' data-tauri-drag-region></div>
 			<div className='controls'>
 				<button id='titlebar-minimize' title='minimize' onClick={toggleMinimize}>

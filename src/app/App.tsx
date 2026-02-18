@@ -5,7 +5,6 @@ import { setupAutoSave } from "../persistance/sync.js";
 import { initializeApp } from "../store/useAppStore.js";
 import CategoryListView from "../view/CategoryListView.js";
 import TodoListView from "../view/TodoListView.js";
-import ThemeSwitcher from "../components/ThemeSwitcher/ThemeSwitcher.js";
 import TitleBar from "../components/TitleBar/index.js";
 
 function App() {
@@ -35,7 +34,6 @@ function App() {
 				onMouseEnter={() => setIsTitlebarVisible(true)}
 				onMouseLeave={() => setIsTitlebarVisible(false)}
 			/>
-			<ThemeSwitcher usecase='toggle' />
 			<Router>
 				<Routes>
 					<Route path='/' element={<CategoryListView />} />

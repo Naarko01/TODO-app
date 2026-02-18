@@ -1,8 +1,9 @@
 import { ArrowBigRight, LucideTrash2 } from "lucide-react";
 import type { TodoCategory } from "../../store/useTodoStore.js";
+import { startWithCapital } from "../../utils/helpers.js";
 
 type CategoryProps = TodoCategory & {
-	todoCount?: number | undefined;
+	todoCount: number;
 	nextTodoDeadline?: string | undefined;
 	onRemove: () => void;
 	onClick: () => void;
@@ -18,11 +19,21 @@ export default function TodoCategory({
 }: CategoryProps) {
 	return (
 		<div className='TodoCategory'>
-			<h1 className='TodoCategory_title'>{title}</h1>
-			<LucideTrash2 onClick={onRemove} className='TodoCategory_delete' />
-			<p className='TodoCategory_todocount'>{todoCount}</p>
-			<ArrowBigRight onClick={onClick} className='TodoCategory_select' />
-			<p className='TodoCategory_nextDeadline'>{nextTodoDeadline}</p>
+			<div className='TodoCategory_content'>
+				<h1 className='TodoCategory_content--title'>{startWithCapital(title)}</h1>
+				<p className='TodoCategory_content--todocount'>
+					{todoCount === 0 && "Pas de tâche associée"}
+					{todoCount === 1 && "Tâche associée: " + todoCount}
+					{todoCount > 1 && "Tâches associées: " + todoCount}
+				</p>
+				<p className='TodoCategory_content--nextDeadline'>{nextTodoDeadline}</p>
+			</div>
+			<button onClick={onRemove} className='TodoCategory_delete'>
+				<LucideTrash2 />
+			</button>
+			<button onClick={onClick} className='TodoCategory_select'>
+				<ArrowBigRight />
+			</button>
 		</div>
 	);
 }

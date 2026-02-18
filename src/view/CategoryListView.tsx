@@ -6,6 +6,7 @@ import { LucideClipboardList, PlusIcon } from "lucide-react";
 
 export default function CategoryListView() {
 	const categories = useTodoStore((state) => state.categories);
+	const todos = useTodoStore((state) => state.todos);
 	const addCategory = useTodoStore((state) => state.addCategory);
 	const deleteCategory = useTodoStore((state) => state.deleteCategory);
 	const navigate = useNavigate();
@@ -22,6 +23,11 @@ export default function CategoryListView() {
 		} else {
 			setError('Vérifiez que le champ "Titre" est bien rempli');
 		}
+	}
+
+	function numbTodoPerCategory(categoryId: string): number {
+		const todoPerCategory = todos.filter((t) => t.categoryId === categoryId);
+		return todoPerCategory.length;
 	}
 
 	return (
@@ -67,9 +73,10 @@ export default function CategoryListView() {
 					<TodoCategory
 						id={element.id}
 						title={element.title}
-						key={element.id}
+						todoCount={numbTodoPerCategory(element.id)}
 						onRemove={() => deleteCategory(element.id)}
 						onClick={() => navigate(`/todo-list/${element.id}`)}
+						key={element.id}
 					/>
 				))}
 			</div>

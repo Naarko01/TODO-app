@@ -29,14 +29,20 @@ h1 {
    font-size: 20px;
 }
 
+svg {
+   color: $text;
+}
+
 #theme {
    background-color: $bg;
    min-height: 100vh;
    position: relative;
-}
-
-.themeSwitcher {
-   position: absolute;
+   transition:
+      background-color,
+      color,
+      border,
+      border-color,
+      background 0.2s ease-out;
 }
 
 .titlebarToggleArea {

@@ -25,10 +25,8 @@ export default function TodoForm(props: TodoFormProps) {
 	const initialTitle = usecase === "edit" ? props.title : "";
 	const initialContent = usecase === "edit" ? props.content : "";
 	const initialDeadline =
-		usecase === "edit" ?
-			props.deadline ?
-				dateStringToInput(props.deadline)
-			:	formatDateToInput(new Date())
+		usecase === "edit" && props.deadline ?
+			dateStringToInput(props.deadline)
 		:	formatDateToInput(new Date());
 
 	const [newTitle, setNewTitle] = useState<string>(initialTitle);

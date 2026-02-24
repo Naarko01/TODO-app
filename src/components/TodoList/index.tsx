@@ -11,10 +11,12 @@ export default function TodoList({ categoryId }: { categoryId: string | undefine
 	const deleteTodo = useTodoStore((state) => state.deleteTodo);
 
 	return (
-		<div>
+		<div className='flex flex-col gap-3 p-4'>
 			{todosByCategory.length === 0 ?
-				<div> Pas de Todo dans cette catégorie</div>
-			:	<div>
+				<div className='text-center text-theme-text-muted mt-8'>
+					Pas de Todo dans cette catégorie
+				</div>
+			:	<div className='flex flex-col gap-3'>
 					{todosByCategory?.map((t) => (
 						<Todo
 							id={t.id}

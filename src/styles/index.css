@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+/* -----------------------------------------------
+   Police JetBrains Mono
+-------------------------------------------------- */
+@font-face {
+   font-family: "JetBrains";
+   src: url("/src/assets/fonts/JetBrainsMono-Regular.ttf") format("truetype");
+}
+
+/* -----------------------------------------------
+   Thème LIGHT
+-------------------------------------------------- */
+.light {
+   --color-bg: #ecf1f3;
+   --color-card: #dadee2;
+   --color-card2: #fcfcfd;
+   --color-text: #1a1a19;
+   --color-text-muted: #525251;
+   --color-text-on-color: #ffffff;
+   --color-primary: #8c6700;
+   --color-primary-fg: #ffffff;
+   --color-secondary: #008b9e;
+   --color-secondary-fg: #000000;
+   --color-accent: #b21eb2;
+   --color-accent-fg: #ffffff;
+   --color-border: #c0c2c4;
+   --color-ring: #a07a00;
+   --color-good: #007a15;
+   --color-good-fg: #ffffff;
+   --color-warn: #c86700;
+   --color-warn-fg: #030303;
+   --color-bad: #9b1c9b;
+   --color-bad-fg: #ffffff;
+}
+
+/* -----------------------------------------------
+   Thème DARK
+-------------------------------------------------- */
+.dark {
+   --color-bg: #010202;
+   --color-card: #050607;
+   --color-card2: #0a0b0c;
+   --color-text: #e4e4e4;
+   --color-text-muted: #8f8f8f;
+   --color-text-on-color: #000000;
+   --color-primary: #a8863e;
+   --color-primary-fg: #000000;
+   --color-secondary: #008b9e;
+   --color-secondary-fg: #000000;
+   --color-accent: #df63dd;
+   --color-accent-fg: #000000;
+   --color-border: #212222;
+   --color-ring: #967c48;
+   --color-good: #358638;
+   --color-good-fg: #000000;
+   --color-warn: #bf6d2c;
+   --color-warn-fg: #000000;
+   --color-bad: #a440a3;
+   --color-bad-fg: #ffffff;
+}
+
+/* -----------------------------------------------
+   Variables Tailwind custom (tokens de thème)
+-------------------------------------------------- */
+@theme inline {
+   --color-theme-bg: var(--color-bg);
+   --color-theme-card: var(--color-card);
+   --color-theme-card2: var(--color-card2);
+   --color-theme-text: var(--color-text);
+   --color-theme-text-muted: var(--color-text-muted);
+   --color-theme-text-on-color: var(--color-text-on-color);
+   --color-theme-primary: var(--color-primary);
+   --color-theme-primary-fg: var(--color-primary-fg);
+   --color-theme-secondary: var(--color-secondary);
+   --color-theme-secondary-fg: var(--color-secondary-fg);
+   --color-theme-accent: var(--color-accent);
+   --color-theme-accent-fg: var(--color-accent-fg);
+   --color-theme-border: var(--color-border);
+   --color-theme-ring: var(--color-ring);
+   --color-theme-good: var(--color-good);
+   --color-theme-good-fg: var(--color-good-fg);
+   --color-theme-warn: var(--color-warn);
+   --color-theme-warn-fg: var(--color-warn-fg);
+   --color-theme-bad: var(--color-bad);
+   --color-theme-bad-fg: var(--color-bad-fg);
+
+   --font-jetbrains: "JetBrains", monospace;
+}
+
+/* -----------------------------------------------
+   Reset & base
+-------------------------------------------------- */
+html,
+body,
+p,
+h1,
+h2 {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   font-family: "JetBrains", monospace;
+}
+
+h1 {
+   font-size: 20px;
+}
+
+svg {
+   color: var(--color-text);
+}
+
+/* -----------------------------------------------
+   Racine du thème (#theme)
+-------------------------------------------------- */
+#theme {
+   background-color: var(--color-bg);
+   color: var(--color-text);
+   min-height: 100vh;
+   position: relative;
+   transition: background-color 0.2s ease-out, color 0.2s ease-out,
+      border-color 0.2s ease-out;
+}
+
+/* -----------------------------------------------
+   Zone d'activation de la titlebar
+-------------------------------------------------- */
+.titlebarToggleArea {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 35px;
+   background-color: transparent;
+   z-index: 1;
+}
+
+/* -----------------------------------------------
+   Mixin base-button (classe utilitaire réutilisable)
+-------------------------------------------------- */
+.base-button {
+   border: 2px solid var(--color-border);
+   border-radius: 7px;
+   padding: 0.35rem 0.75rem;
+   font-size: 16px;
+   font-weight: 500;
+   cursor: pointer;
+   font-family: "JetBrains", monospace;
+}

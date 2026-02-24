@@ -31,44 +31,57 @@ export default function CategoryListView() {
 	}
 
 	return (
-		<div className='categoryListView'>
-			<div className='categoryListView_header'>
-				<div className='categoryListView_header--title'>
-					<LucideClipboardList className='categoryListView_header--title-icon' />
-					<h1>Mes Catégories</h1>
+		<div className='flex flex-col items-center gap-4 text-theme-text h-full'>
+			{/* Header */}
+			<div className='flex justify-center items-center gap-12 bg-theme-card2 w-full min-h-18.75 border-b-2 border-theme-card'>
+				<div className='flex justify-center items-center'>
+					<LucideClipboardList className='text-theme-warn' />
+					<h1 className='ml-2.5'>Mes Catégories</h1>
 				</div>
-				<div className='categoryListView_header--addBtn'>
-					<PlusIcon className='plus-icon' />
-					<button onClick={() => setIsAdding(true)} disabled={isAdding}>
+				<div className='relative'>
+					<PlusIcon className='absolute top-1 left-1.25 w-5' />
+					<button
+						onClick={() => setIsAdding(true)}
+						disabled={isAdding}
+						className='base-button pl-6 h-max font-medium bg-theme-card2 text-theme-text disabled:opacity-50'>
 						Ajouter
 					</button>
 				</div>
 			</div>
+
+			{/* Formulaire d'ajout */}
 			{isAdding && (
-				<form onSubmit={submitForm} className='categoryListView_addForm'>
-					<p>Nouvelle Catégorie:</p>
-					<label htmlFor='newCatTitle'>Titre</label>
+				<form
+					onSubmit={submitForm}
+					className='flex flex-col justify-center items-center gap-2 border-2 border-theme-border bg-theme-card2 w-1/2 max-w-125 h-37.5 rounded-[10px] p-4'>
+					<p className='text-center font-bold'>Nouvelle Catégorie:</p>
+					<label htmlFor='newCatTitle' className='text-center font-bold'>
+						Titre
+					</label>
 					<input
 						type='text'
 						name='newCatTitle'
 						id='newCatTitle'
 						value={newCatTitle}
 						onChange={(e) => setNewCatTitle(e.currentTarget.value)}
+						className='h-7.5 font-jetbrains text-base font-semibold mb-2.5 w-4/5 max-w-87.5 self-center rounded-full px-5 border border-theme-border bg-theme-card text-theme-text outline-none focus:ring-2 focus:ring-theme-ring'
 					/>
-					<div className='categoryListView_addForm--btn'>
-						<button type='submit' className='categoryListView_addForm--btn-submit'>
+					<div className='flex justify-center gap-5'>
+						<button type='submit' className='base-button bg-theme-card text-theme-text'>
 							Créer
 						</button>
 						<button
 							onClick={() => setIsAdding(false)}
-							className='categoryListView_addForm--btn-cancel'>
+							className='base-button bg-theme-card text-theme-text'>
 							Annuler
 						</button>
 					</div>
-					{error && <p>{error}</p>}
+					{error && <p className='text-theme-bad text-sm'>{error}</p>}
 				</form>
 			)}
-			<div className='categoryListView_list'>
+
+			{/* Liste des catégories */}
+			<div className='flex flex-col justify-center items-center gap-3.75 w-4/5 max-w-175'>
 				{categories.map((element) => (
 					<TodoCategory
 						id={element.id}

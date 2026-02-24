@@ -9,21 +9,42 @@ export default function TitleBar({ isVisible, onMouseEnter, onMouseLeave }: Titl
 
 	return (
 		<div
-			className={`titlebar ${isVisible ? "visible" : "hidden"}`}
+			className={[
+				"fixed top-0 left-0 w-full h-9 flex justify-between items-center",
+				"transition-all duration-300 ease-out",
+				isVisible ?
+					"translate-y-0 opacity-100 pointer-events-auto bg-[color-mix(in_srgb,var(--color-text-muted)_70%,transparent)] border-b border-theme-text-muted backdrop-blur-sm z-10"
+				:	"-translate-y-full opacity-0 pointer-events-none bg-transparent",
+			].join(" ")}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}>
 			<ThemeSwitcher usecase='toggle' />
-			<div className='drag-area' data-tauri-drag-region></div>
-			<div className='controls'>
-				<button id='titlebar-minimize' title='minimize' onClick={toggleMinimize}>
+			<div
+				className='flex-1 h-full cursor-grab active:cursor-grabbing select-none'
+				data-tauri-drag-region
+			/>
+			<div className='flex justify-end items-center gap-2 pr-2 shrink-0'>
+				<button
+					id='titlebar-minimize'
+					title='minimize'
+					onClick={toggleMinimize}
+					className='cursor-pointer px-2 py-1 border-none bg-transparent text-inherit flex items-center justify-center rounded hover:bg-white/10 active:bg-white/20 transition-colors'>
 					<MinusIcon />
 				</button>
-				<button id='titlebar-maximize' title='maximize' onClick={toggleMaximize}>
+				<button
+					id='titlebar-maximize'
+					title='maximize'
+					onClick={toggleMaximize}
+					className='cursor-pointer px-2 py-1 border-none bg-transparent text-inherit flex items-center justify-center rounded hover:bg-white/10 active:bg-white/20 transition-colors'>
 					{isWindowMaximize ?
 						<Minimize2Icon />
 					:	<Maximize2Icon />}
 				</button>
-				<button id='titlebar-close' title='close' onClick={closeApp}>
+				<button
+					id='titlebar-close'
+					title='close'
+					onClick={closeApp}
+					className='cursor-pointer px-2 py-1 border-none bg-transparent text-inherit flex items-center justify-center rounded hover:bg-white/10 active:bg-white/20 transition-colors'>
 					<XIcon />
 				</button>
 			</div>

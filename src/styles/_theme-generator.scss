@@ -1,9 +1,0 @@
-@use "./variables" as *;
-
-@each $themes-name, $themes-colors in $themes {
-   .#{$themes-name} {
-      @each $property, $value in $themes-colors {
-         --color-#{$property}: #{$value};
-      }
-   }
-}

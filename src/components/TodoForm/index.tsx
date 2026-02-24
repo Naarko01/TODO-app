@@ -76,37 +76,65 @@ export default function TodoForm(props: TodoFormProps) {
 
 	return (
 		isUpdating && (
-			<form onSubmit={handleSubmit}>
-				<label htmlFor='newTitle'>Titre</label>
-				<input
-					type='text'
-					name='newTitle'
-					id='newTitle'
-					value={newTitle}
-					onChange={handleChange}
-					required
-				/>
-				<label htmlFor='newContent'>Contenu</label>
-				<input
-					type='text'
-					name='newContent'
-					id='newContent'
-					value={newContent}
-					onChange={handleChange}
-					required
-				/>
-				<label htmlFor='newDeadline'>A faire avant le:</label>
-				<input
-					type='date'
-					name='newDeadline'
-					id='newDeadline'
-					value={newDeadline}
-					min={formatDateToInput(getTomorrowDate())}
-					onChange={handleChange}
-					required
-				/>
-				<button type='submit'>Confirmer</button>
-				<button onClick={() => setIsUpdating(false)}>Annuler</button>
+			<form
+				onSubmit={handleSubmit}
+				className='flex flex-col gap-3 border-2 border-theme-border bg-theme-card2 rounded-[10px] p-4 mx-4 my-3'>
+				<div className='flex flex-col gap-1'>
+					<label htmlFor='newTitle' className='text-theme-text font-semibold text-sm'>
+						Titre
+					</label>
+					<input
+						type='text'
+						name='newTitle'
+						id='newTitle'
+						value={newTitle}
+						onChange={handleChange}
+						required
+						className='h-9 font-jetbrains text-sm rounded-lg px-3 border border-theme-border bg-theme-card text-theme-text outline-none focus:ring-2 focus:ring-theme-ring'
+					/>
+				</div>
+				<div className='flex flex-col gap-1'>
+					<label htmlFor='newContent' className='text-theme-text font-semibold text-sm'>
+						Contenu
+					</label>
+					<input
+						type='text'
+						name='newContent'
+						id='newContent'
+						value={newContent}
+						onChange={handleChange}
+						required
+						className='h-9 font-jetbrains text-sm rounded-lg px-3 border border-theme-border bg-theme-card text-theme-text outline-none focus:ring-2 focus:ring-theme-ring'
+					/>
+				</div>
+				<div className='flex flex-col gap-1'>
+					<label htmlFor='newDeadline' className='text-theme-text font-semibold text-sm'>
+						À faire avant le:
+					</label>
+					<input
+						type='date'
+						name='newDeadline'
+						id='newDeadline'
+						value={newDeadline}
+						min={formatDateToInput(getTomorrowDate())}
+						onChange={handleChange}
+						required
+						className='h-9 font-jetbrains text-sm rounded-lg px-3 border border-theme-border bg-theme-card text-theme-text outline-none focus:ring-2 focus:ring-theme-ring'
+					/>
+				</div>
+				{error && <p className='text-theme-bad text-sm'>{error}</p>}
+				<div className='flex gap-3 mt-1'>
+					<button
+						type='submit'
+						className='base-button bg-theme-good text-theme-good-fg hover:opacity-90 transition-opacity'>
+						Confirmer
+					</button>
+					<button
+						onClick={() => setIsUpdating(false)}
+						className='base-button bg-theme-card text-theme-text hover:opacity-80 transition-opacity'>
+						Annuler
+					</button>
+				</div>
 			</form>
 		)
 	);

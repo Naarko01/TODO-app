@@ -1,8 +1,8 @@
 import { useState } from "react";
-import TodoCategory from "../components/TodoCategory/index.jsx";
 import { useTodoStore } from "../store/useTodoStore.js";
 import { useNavigate } from "react-router-dom";
 import { LucideClipboardList, PlusIcon } from "lucide-react";
+import TodoCategory from "../components/TodoCategory/index.jsx";
 
 export default function CategoryListView() {
 	const categories = useTodoStore((state) => state.categories);

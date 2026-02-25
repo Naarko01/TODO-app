@@ -1,29 +1,6 @@
 import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
-
-export type Todo = {
-	id: string;
-	title: string;
-	done?: boolean;
-	creationDate: string;
-	categoryId?: string | undefined;
-	content: string;
-	deadline?: string | undefined;
-};
-
-export type TodoCategory = { id: string; title: string };
-
-export type TodoData = { todos: Todo[]; categories: TodoCategory[] };
-
-type TodoStore = TodoData & {
-	initialized: boolean;
-	addTodo: (todo: Omit<Todo, "id" | "creationDate">) => void;
-	updateTodo: (id: string, patch: Partial<Todo>) => void;
-	deleteTodo: (id: string) => void;
-	toggleTodo: (id: string) => void;
-	addCategory: (title: string) => void;
-	deleteCategory: (id: string) => void;
-};
+import type { TodoData, TodoStore } from "../utils/types.js";
 
 const defaultData: TodoData = { todos: [], categories: [] };
 
@@ -46,17 +23,25 @@ export const useTodoStore = create<TodoStore>()(
 			})),
 		updateTodo: (id, patch) =>
 			set((state) => ({
-				todos: state.todos.map((t) => (t.id === id ? { ...t, ...patch } : t)),
+				todos: state.todos.map((t) =>
+					t.id === id ? { ...t, ...patch } : t,
+				),
 			})),
-		deleteTodo: (id) => set((state) => ({ todos: state.todos.filter((t) => t.id !== id) })),
+		deleteTodo: (id) =>
+			set((state) => ({ todos: state.todos.filter((t) => t.id !== id) })),
 		toggleTodo: (id) =>
 			set((state) => ({
-				todos: state.todos.map((t) => (t.id === id ? { ...t, done: !t.done } : t)),
+				todos: state.todos.map((t) =>
+					t.id === id ? { ...t, done: !t.done } : t,
+				),
 			})),
 		// Categories action
 		addCategory: (title) =>
 			set((state) => ({
-				categories: [...state.categories, { id: crypto.randomUUID(), title: title }],
+				categories: [
+					...state.categories,
+					{ id: crypto.randomUUID(), title: title },
+				],
 			})),
 		deleteCategory: (id) =>
 			set((state) => ({

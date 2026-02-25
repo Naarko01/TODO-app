@@ -1,7 +1,10 @@
 import { useUserStore } from "../../store/useUserStore.js";
 import { Moon, Sun } from "lucide-react";
+import type { Usecases } from "../../utils/types.js";
 
-type ThemeSwitchProps = { usecase: "toggle" | "select" };
+type ThemeSwitchProps = {
+	usecase: Extract<Usecases, "toggle" | "select">;
+};
 
 export default function ThemeSwitcher({ usecase }: ThemeSwitchProps) {
 	const { theme, changeTheme, availableThemes, toggleTheme } = useUserStore();

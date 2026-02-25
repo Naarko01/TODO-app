@@ -12,7 +12,13 @@ type BaseProps = {
 	categoryId?: string | undefined;
 };
 
-type AddProps = BaseProps & { usecase: "add" };
+type AddProps = BaseProps & {
+	usecase: "add";
+};
+
+type AddCategoryProps = BaseProps & {
+	usecase: "addCategory";
+};
 
 type EditProps = BaseProps & {
 	usecase: "edit";
@@ -22,7 +28,7 @@ type EditProps = BaseProps & {
 	id: string;
 };
 
-type TodoFormProps = AddProps | EditProps;
+type TodoFormProps = AddProps | EditProps | AddCategoryProps;
 
 export default function TodoForm(props: TodoFormProps) {
 	const { usecase, isUpdating, setIsUpdating } = props;

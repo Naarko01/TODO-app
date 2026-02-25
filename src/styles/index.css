@@ -140,10 +140,31 @@ svg {
 -------------------------------------------------- */
 .base-button {
    border: 2px solid var(--color-border);
-   border-radius: 7px;
+   border-radius: 10px;
    padding: 0.375rem;
    font-size: 16px;
    font-weight: 500;
    cursor: pointer;
    font-family: "JetBrains", monospace;
+}
+
+.little-button {
+   border: 2px solid var(--color-border);
+   border-radius: 10px;
+   padding: 0.25rem 0.375rem;
+   font-size: 12px;
+   height: fit-content;
+   font-weight: 500;
+   cursor: pointer;
+   font-family: "JetBrains", monospace;
+}
+
+.todo-card {
+   border-radius: 10px;
+   border: 1px solid var(--color-border);
+   background-color: var(--color-card2);
+   padding: 8px;
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
 }

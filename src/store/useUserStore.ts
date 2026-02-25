@@ -1,19 +1,9 @@
 import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
+import type { UserStore } from "../utils/types.js";
 
 const AVAILABLE_THEMES = ["light", "dark"];
 const DEFAULT_THEME = "light";
-
-export type UserData = {
-	theme: string;
-	// other user options to come
-};
-
-type UserStore = UserData & {
-	availableThemes: string[];
-	changeTheme: (newTheme: string) => void;
-	toggleTheme: () => void;
-};
 
 export const useUserStore = create<UserStore>()(
 	subscribeWithSelector<UserStore>((set) => ({

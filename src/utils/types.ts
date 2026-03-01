@@ -1,5 +1,7 @@
 export type Usecases = "addTodo" | "edit" | "addCategory" | "toggle" | "select";
 
+export type SortOrders = "asc" | "desc";
+
 export type Todo = {
 	id: string;
 	title: string;

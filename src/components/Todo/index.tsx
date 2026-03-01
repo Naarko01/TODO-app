@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Todo } from "../../utils/types.js";
+import { useTodoStore } from "../../store/useTodoStore.js";
 import TodoForm from "../TodoForm/index.js";
 
 type TodoProps = Todo & {
@@ -16,9 +17,13 @@ export default function Todo({
 	removeTodo,
 }: TodoProps) {
 	const [isUpdating, setIsUpdating] = useState<boolean>(false);
+	const toggleTodo = useTodoStore((state) => state.toggleTodo);
+	const todos = useTodoStore((state) => state.todos);
+	const isDone = todos.find((t) => t.id === id)?.done;
 
 	return (
 		<div className="todo-card">
+			{isDone && <div className="todoDoneFilter"></div>}
 			<h1 className="font-bold text-theme-text">{title}</h1>
 			<p className="text-sm text-theme-text-muted">{content}</p>
 			<TodoForm
@@ -38,7 +43,7 @@ export default function Todo({
 				</p>
 				<p>Date de création: {creationDate}</p>
 			</div>
-			<div className="mt-2 flex gap-2">
+			<div className="mt-2 flex gap-2 items-center">
 				<button
 					onClick={removeTodo}
 					className="little-button bg-theme-card text-theme-text
@@ -54,6 +59,17 @@ export default function Todo({
 				>
 					Modifier
 				</button>
+				<div className="flex gap-2 text-sm">
+					<label htmlFor="toggleDone">Marquer comme fait: </label>
+					<input
+						type="checkbox"
+						name="toggleDone"
+						id="toggleDone"
+						className="cursor-pointer w-4"
+						checked={isDone}
+						onChange={() => toggleTodo(id)}
+					/>
+				</div>
 			</div>
 		</div>
 	);

@@ -8,23 +8,9 @@ import TodoForm from "../components/TodoForm/index.js";
 export default function CategoryListView() {
 	const categories = useTodoStore((state) => state.categories);
 	const todos = useTodoStore((state) => state.todos);
-	const addCategory = useTodoStore((state) => state.addCategory);
 	const deleteCategory = useTodoStore((state) => state.deleteCategory);
 	const navigate = useNavigate();
 	const [isAdding, setIsAdding] = useState<boolean>(false);
-	const [newCatTitle, setNewCatTitle] = useState<string>("");
-	const [error, setError] = useState<null | string>(null);
-
-	function submitForm(e: React.SubmitEvent) {
-		e.preventDefault();
-		if (newCatTitle !== "") {
-			addCategory(newCatTitle);
-			setError(null);
-			setIsAdding(false);
-		} else {
-			setError('Vérifiez que le champ "Titre" est bien rempli');
-		}
-	}
 
 	function numbTodoPerCategory(categoryId: string): number {
 		const todoPerCategory = todos.filter((t) => t.categoryId === categoryId);
@@ -42,7 +28,7 @@ export default function CategoryListView() {
 					<LucideClipboardList className="text-theme-warn!" />
 					<h1 className="ml-2.5">Mes Catégories</h1>
 				</div>
-				<div className="relative">
+				<div className="relative cursor-pointer">
 					<PlusIcon className="absolute top-1.75 left-1.5 w-5" />
 					<button
 						onClick={() => setIsAdding(true)}
@@ -57,7 +43,7 @@ export default function CategoryListView() {
 			{/* Formulaire d'ajout */}
 			{isAdding && (
 				<TodoForm
-					usecase="add"
+					usecase="addCategory"
 					isUpdating={isAdding}
 					setIsUpdating={setIsAdding}
 				/>

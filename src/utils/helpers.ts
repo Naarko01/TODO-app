@@ -1,3 +1,6 @@
+import type { SortOptions } from "./constants.js";
+import type { SortOrders, Todo } from "./types.js";
+
 /**
  * @param {Date} date A Date object to be formatted into a string suitable for an HTML date input field.
  * @returns {string} A string in the format "YYYY-MM-DD" representing the given date.
@@ -38,4 +41,59 @@ function startWithCapital(str: string): string {
 	return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export { formatDateToInput, getTomorrowDate, dateStringToInput, startWithCapital };
+/**
+ *
+ * @param list The list of Todo items to be sorted.
+ * @param sortingOptions The key of the SortOptions enum that determines the property by which the list should be sorted (e.g., "creationDate", "deadline", "done", "title").
+ * @param sortOrders A string that indicates the sorting order, either "asc" for ascending or "desc" for descending.
+ * @returns A new array of Todo items sorted according to the specified sorting options and order.
+ */
+function sortList(
+	list: Todo[],
+	sortingOptions: keyof typeof SortOptions,
+	sortOrders: SortOrders,
+): Todo[] {
+	const sorted = [...list];
+	switch (sortingOptions) {
+		case "creationDate":
+			sorted.sort((a, b) => {
+				const dateA = new Date(a.creationDate).getTime();
+				const dateB = new Date(b.creationDate).getTime();
+				return sortOrders === "asc" ? dateA - dateB : dateB - dateA;
+			});
+			break;
+		case "deadline":
+			sorted.sort((a, b) => {
+				if (a.deadline !== undefined && b.deadline !== undefined) {
+					const dateA = new Date(a.deadline).getTime();
+					const dateB = new Date(b.deadline).getTime();
+					return sortOrders === "asc" ? dateA - dateB : dateB - dateA;
+				}
+				return 0;
+			});
+			break;
+		case "done":
+			sorted.sort((a, b) =>
+				sortOrders === "asc"
+					? Number(a.done) - Number(b.done)
+					: Number(b.done) - Number(a.done),
+			);
+			break;
+		case "title":
+			sorted.sort((a, b) =>
+				sortOrders === "asc"
+					? a.title.charCodeAt(0) - b.title.charCodeAt(0)
+					: b.title.charCodeAt(0) - a.title.charCodeAt(0),
+			);
+			break;
+	}
+	return sorted;
+}
+
+export {
+	formatDateToInput,
+	getTomorrowDate,
+	dateStringToInput,
+	startWithCapital,
+	sortList,
+};

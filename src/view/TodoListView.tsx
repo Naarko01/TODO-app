@@ -29,7 +29,7 @@ export default function TodoListView() {
 				<h1 className="text-theme-text">
 					Catégorie: {startWithCapital(targetedCategory.title)}
 				</h1>
-				<div className="relative">
+				<div className="relative cursor-pointer">
 					<PlusIcon
 						className="absolute top-1.75 left-1.25 w-5 text-theme-text"
 					/>
@@ -45,7 +45,7 @@ export default function TodoListView() {
 			</div>
 			<div>
 				<TodoForm
-					usecase="add"
+					usecase="addTodo"
 					isUpdating={isAdding}
 					setIsUpdating={setIsAdding}
 					categoryId={categoryId}

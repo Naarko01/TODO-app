@@ -5,6 +5,7 @@ import {
 	dateStringToInput,
 } from "../../utils/helpers.js";
 import { useTodoStore } from "../../store/useTodoStore.js";
+import type { Usecases } from "../../utils/types.js";
 
 type BaseProps = {
 	isUpdating: boolean;
@@ -12,23 +13,23 @@ type BaseProps = {
 	categoryId?: string | undefined;
 };
 
-type AddProps = BaseProps & {
-	usecase: "add";
+type AddTodoProps = BaseProps & {
+	usecase: Extract<Usecases, "addTodo">;
 };
 
 type AddCategoryProps = BaseProps & {
-	usecase: "addCategory";
+	usecase: Extract<Usecases, "addCategory">;
 };
 
 type EditProps = BaseProps & {
-	usecase: "edit";
+	usecase: Extract<Usecases, "edit">;
 	title: string;
 	content: string;
 	deadline?: string | undefined;
 	id: string;
 };
 
-type TodoFormProps = AddProps | EditProps | AddCategoryProps;
+type TodoFormProps = AddTodoProps | EditProps | AddCategoryProps;
 
 export default function TodoForm(props: TodoFormProps) {
 	const { usecase, isUpdating, setIsUpdating } = props;
@@ -62,9 +63,12 @@ export default function TodoForm(props: TodoFormProps) {
 
 	function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
 		e.preventDefault();
-		if (newTitle !== "" && newContent !== "") {
+		if (
+			(usecase === "addCategory" && newTitle !== "") ||
+			(newTitle !== "" && newContent !== "")
+		) {
 			switch (usecase) {
-				case "add":
+				case "addTodo":
 					addTodos({
 						title: newTitle,
 						content: newContent,
@@ -72,6 +76,9 @@ export default function TodoForm(props: TodoFormProps) {
 						deadline:
 							newDeadline && new Date(newDeadline).toLocaleDateString(),
 					});
+					break;
+				case "addCategory":
+					addCategory(newTitle);
 					break;
 				case "edit":
 					updateTodos(props.id, {
@@ -115,45 +122,51 @@ export default function TodoForm(props: TodoFormProps) {
 							outline-none focus:ring-2 focus:ring-theme-ring"
 					/>
 				</div>
-				<div className="flex flex-col gap-1">
-					<label
-						htmlFor="newContent"
-						className="text-theme-text font-semibold text-sm"
-					>
-						Contenu
-					</label>
-					<input
-						type="text"
-						name="newContent"
-						id="newContent"
-						value={newContent}
-						onChange={handleChange}
-						required
-						className="h-9 font-jetbrains text-sm rounded-lg px-3 border
-							border-theme-border bg-theme-card text-theme-text
-							outline-none focus:ring-2 focus:ring-theme-ring"
-					/>
-				</div>
-				<div className="flex flex-col gap-1">
-					<label
-						htmlFor="newDeadline"
-						className="text-theme-text font-semibold text-sm"
-					>
-						À faire avant le:
-					</label>
-					<input
-						type="date"
-						name="newDeadline"
-						id="newDeadline"
-						value={newDeadline}
-						min={formatDateToInput(getTomorrowDate())}
-						onChange={handleChange}
-						required
-						className="h-9 font-jetbrains text-sm rounded-lg px-3 border
-							border-theme-border bg-theme-card text-theme-text
-							outline-none focus:ring-2 focus:ring-theme-ring"
-					/>
-				</div>
+				{props.usecase !== "addCategory" && (
+					<>
+						<div className="flex flex-col gap-1">
+							<label
+								htmlFor="newContent"
+								className="text-theme-text font-semibold text-sm"
+							>
+								Contenu
+							</label>
+							<input
+								type="text"
+								name="newContent"
+								id="newContent"
+								value={newContent}
+								onChange={handleChange}
+								required
+								className="h-9 font-jetbrains text-sm rounded-lg px-3
+									border border-theme-border bg-theme-card
+									text-theme-text outline-none focus:ring-2
+									focus:ring-theme-ring"
+							/>
+						</div>
+						<div className="flex flex-col gap-1">
+							<label
+								htmlFor="newDeadline"
+								className="text-theme-text font-semibold text-sm"
+							>
+								À faire avant le:
+							</label>
+							<input
+								type="date"
+								name="newDeadline"
+								id="newDeadline"
+								value={newDeadline}
+								min={formatDateToInput(getTomorrowDate())}
+								onChange={handleChange}
+								required
+								className="h-9 font-jetbrains text-sm rounded-lg px-3
+									border border-theme-border bg-theme-card
+									text-theme-text outline-none focus:ring-2
+									focus:ring-theme-ring"
+							/>
+						</div>
+					</>
+				)}
 				{error && <p className="text-theme-bad text-sm">{error}</p>}
 				<div className="flex gap-3 mt-1">
 					<button

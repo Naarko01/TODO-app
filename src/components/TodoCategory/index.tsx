@@ -1,6 +1,6 @@
 import { ArrowBigRight, LucideTrash2 } from "lucide-react";
 import { startWithCapital } from "../../utils/helpers.js";
-import type { TodoCategory } from "../../store/useTodoStore.js";
+import type { TodoCategory } from "../../utils/types.js";
 
 type CategoryProps = TodoCategory & {
 	todoCount: number;

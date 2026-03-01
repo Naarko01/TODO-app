@@ -45,13 +45,13 @@ function startWithCapital(str: string): string {
  *
  * @param list The list of Todo items to be sorted.
  * @param sortingOptions The key of the SortOptions enum that determines the property by which the list should be sorted (e.g., "creationDate", "deadline", "done", "title").
- * @param sortOrders A string that indicates the sorting order, either "asc" for ascending or "desc" for descending.
+ * @param order A string that indicates the sorting order, either "asc" for ascending or "desc" for descending.
  * @returns A new array of Todo items sorted according to the specified sorting options and order.
  */
 function sortList(
 	list: Todo[],
 	sortingOptions: keyof typeof SortOptions,
-	sortOrders: SortOrders,
+	order: SortOrders,
 ): Todo[] {
 	const sorted = [...list];
 	switch (sortingOptions) {
@@ -59,7 +59,7 @@ function sortList(
 			sorted.sort((a, b) => {
 				const dateA = new Date(a.creationDate).getTime();
 				const dateB = new Date(b.creationDate).getTime();
-				return sortOrders === "asc" ? dateA - dateB : dateB - dateA;
+				return order === "asc" ? dateA - dateB : dateB - dateA;
 			});
 			break;
 		case "deadline":
@@ -67,21 +67,21 @@ function sortList(
 				if (a.deadline !== undefined && b.deadline !== undefined) {
 					const dateA = new Date(a.deadline).getTime();
 					const dateB = new Date(b.deadline).getTime();
-					return sortOrders === "asc" ? dateA - dateB : dateB - dateA;
+					return order === "asc" ? dateA - dateB : dateB - dateA;
 				}
 				return 0;
 			});
 			break;
 		case "done":
 			sorted.sort((a, b) =>
-				sortOrders === "asc"
+				order === "asc"
 					? Number(a.done) - Number(b.done)
 					: Number(b.done) - Number(a.done),
 			);
 			break;
 		case "title":
 			sorted.sort((a, b) =>
-				sortOrders === "asc"
+				order === "asc"
 					? a.title.charCodeAt(0) - b.title.charCodeAt(0)
 					: b.title.charCodeAt(0) - a.title.charCodeAt(0),
 			);

@@ -1,6 +1,11 @@
-import { readTextFile, writeTextFile, exists, BaseDirectory, mkdir } from "@tauri-apps/plugin-fs";
-import type { TodoData } from "../store/useTodoStore.js";
-import type { UserData } from "../store/useUserStore.js";
+import {
+	readTextFile,
+	writeTextFile,
+	exists,
+	BaseDirectory,
+	mkdir,
+} from "@tauri-apps/plugin-fs";
+import type { TodoData, UserData } from "../utils/types.js";
 
 export type AppData = { todos: TodoData; user: UserData };
 
@@ -69,7 +74,9 @@ export async function loadFromDisk(fallback: AppData): Promise<AppData> {
 export async function saveToDisk(data: AppData) {
 	try {
 		await ensureAppDir();
-		await writeTextFile(getFilePath(), JSON.stringify(data, null, 2), { baseDir: DIR_PATH });
+		await writeTextFile(getFilePath(), JSON.stringify(data, null, 2), {
+			baseDir: DIR_PATH,
+		});
 	} catch (err) {
 		console.error("Save error:", err);
 	}
